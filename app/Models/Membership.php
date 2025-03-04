@@ -22,7 +22,7 @@ class Membership extends Model
         'join_date',
         'expired_date',
         'no_whatsapp',
-        'status',
+        'status', // boolean 1 = aktif, 0 = non aktif
     ];
 
     protected $casts = [

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\LogMembershipStatusType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class LogMembership extends Model
 {
@@ -16,16 +17,18 @@ class LogMembership extends Model
         'gym_package_id',
         'start_date',
         'end_date',
+        'status',
     ];
 
     protected $casts = [
         'start_date' => 'date',
         'end_date'   => 'date',
+        'status'     => LogMembershipStatusType::class,
     ];
 
     public function membership(): BelongsTo
     {
-        return $this->belongsTo(Memberships::class);
+        return $this->belongsTo(Membership::class);
     }
 
     public function gymPackage(): BelongsTo
