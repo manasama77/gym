@@ -15,8 +15,20 @@ Route::get('/', function (): View {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('membership', [MembershipController::class, 'index'])->name('membership');
 
+    Route::resource('membership', MembershipController::class)
+        ->only([
+            'index',
+            'create',
+            'edit',
+            'destroy'
+        ])
+        ->names([
+            'index'   => 'membership',
+            'create'  => 'membership.create',
+            'edit'    => 'membership.edit',
+            'destroy' => 'membership.destroy',
+        ]);
 
     Route::redirect('settings', 'settings/profile');
 

@@ -30,6 +30,11 @@ class Membership extends Model
         'member_type' => MemberType::class,
     ];
 
+    public function getStatusAttribute($value): string
+    {
+        return $value ? 'Aktif' : 'Tidak Aktif';
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
