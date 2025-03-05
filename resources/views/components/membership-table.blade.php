@@ -10,6 +10,7 @@
         <table class="table table-compact table-pin-rows">
             <thead>
                 <tr>
+                    <th><i class="fas fa-cogs"></i></th>
                     <th>Nama</th>
                     <th>Email</th>
                     <th>No WhatsApp</th>
@@ -18,25 +19,11 @@
                     <th>Tanggal Join</th>
                     <th>Tanggal Expired</th>
                     <th>Status</th>
-                    <th><i class="fas fa-cogs"></i></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($memberships as $membership)
                     <tr>
-                        <td class="text-nowrap">{{ $membership->user->name }}</td>
-                        <td class="text-nowrap">{{ $membership->user->email }}</td>
-                        <td class="text-nowrap">{{ $membership->no_whatsapp }}</td>
-                        <td>{{ $membership->gender->label() }}</td>
-                        <td>{{ $membership->member_type->label() }}</td>
-                        <td>{{ $membership->join_date }}</td>
-                        <td>{{ $membership->expired_date }}</td>
-                        <td class="text-nowrap text-center">
-                            @php
-                                $badge_color = $membership->getRawOriginal('status') ? 'badge-success' : 'badge-error';
-                            @endphp
-                            <div class="badge badge-xs {{ $badge_color }}">{{ $membership->status }}</div>
-                        </td>
                         <td class="text-nowrap flex justify-center gap-1">
                             <a href="{{ route('membership.edit', $membership) }}" class="btn btn-sm btn-primary">
                                 <i class="fas fa-edit"></i>
@@ -53,6 +40,23 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
+                            <button class="btn btn-sm btn-info"
+                                onclick="showResetModal({{ $membership->user->id }}, '{{ $membership->user->email }}')">
+                                <i class="fas fa-key"></i>
+                            </button>
+                        </td>
+                        <td class="text-nowrap">{{ $membership->user->name }}</td>
+                        <td class="text-nowrap">{{ $membership->user->email }}</td>
+                        <td class="text-nowrap">{{ $membership->no_whatsapp }}</td>
+                        <td>{{ $membership->gender->label() }}</td>
+                        <td>{{ $membership->member_type->label() }}</td>
+                        <td>{{ $membership->join_date }}</td>
+                        <td>{{ $membership->expired_date }}</td>
+                        <td class="text-nowrap text-center">
+                            @php
+                                $badge_color = $membership->getRawOriginal('status') ? 'badge-success' : 'badge-error';
+                            @endphp
+                            <div class="badge badge-xs {{ $badge_color }}">{{ $membership->status }}</div>
                         </td>
                     </tr>
                 @endforeach
@@ -63,5 +67,4 @@
     <div>
         {{ $memberships->links('vendor.pagination.daisy') }}
     </div>
-
 </div>

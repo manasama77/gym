@@ -21,14 +21,16 @@ Route::middleware(['auth'])->group(function () {
             'index',
             'create',
             'edit',
-            'destroy'
+            'destroy',
         ])
         ->names([
-            'index'   => 'membership',
-            'create'  => 'membership.create',
-            'edit'    => 'membership.edit',
-            'destroy' => 'membership.destroy',
+            'index'          => 'membership',
+            'create'         => 'membership.create',
+            'edit'           => 'membership.edit',
+            'destroy'        => 'membership.destroy',
         ]);
+
+    Route::post('membership/reset-password/{id}', [MembershipController::class, 'reset_password'])->name('membership.reset-password');
 
     Route::redirect('settings', 'settings/profile');
 

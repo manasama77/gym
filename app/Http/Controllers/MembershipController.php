@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Membership;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreMembershipRequest;
 use App\Http\Requests\UpdateMembershipRequest;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MembershipController extends Controller
 {
@@ -80,5 +83,28 @@ class MembershipController extends Controller
         $membership->user->delete();
         $membership->delete();
         return redirect()->route('membership')->with('success', 'Member berhasil dihapus');
+    }
+
+    public function reset_password(Request $request, $id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['error' => 'User tidak ditemukan'], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'password' => ['required', 'min:8', 'confirmed'],
+        ], [
+            'password.required'  => 'Password harus diisi',
+            'password.min'       => 'Password harus memiliki minimal 8 karakter',
+            'password.confirmed' => 'Password tidak sama',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return response()->json(['success' => 'Password berhasil direset'], 200);
     }
 }
