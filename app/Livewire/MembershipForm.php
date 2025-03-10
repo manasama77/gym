@@ -48,16 +48,16 @@ class MembershipForm extends Component
 
     public function mount($membership)
     {
-        $this->membership            = $membership;
-        $this->name                  = $membership->user->name ?? '';
-        $this->gender                = $membership->gender->value ?? GenderType::MALE->value;
-        $this->member_type           = $membership->member_type->value ?? MemberType::PENGHUNI->value;
-        $this->join_date             = $membership->join_date ?? now()->format('Y-m-d');
-        $this->no_whatsapp           = $membership->no_whatsapp ?? '';
-        $this->email                 = $membership->user->email ?? '';
-        $this->password              = '';
+        $this->membership = $membership;
+        $this->name = $membership->user->name ?? '';
+        $this->gender = $membership->gender->value ?? GenderType::MALE->value;
+        $this->member_type = $membership->member_type->value ?? MemberType::PENGHUNI->value;
+        $this->join_date = $membership->join_date ?? now()->format('Y-m-d');
+        $this->no_whatsapp = $membership->no_whatsapp ?? '';
+        $this->email = $membership->user->email ?? '';
+        $this->password = '';
         $this->password_confirmation = '';
-        $this->status                = $membership->getRawOriginal('status') ? "1" : "0";
+        $this->status = $membership->getRawOriginal('status') ? "1" : "0";
     }
 
     public function save()
@@ -65,20 +65,20 @@ class MembershipForm extends Component
         $validated = $this->validate();
 
         $user = User::create([
-            'name'     => $validated['name'],
-            'email'    => $validated['email'],
+            'name' => $validated['name'],
+            'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ])
             ->assignRole(RoleType::USER->value);
 
         Membership::create([
-            'user_id'      => $user->id,
-            'gender'       => $validated['gender'],
-            'member_type'  => $validated['member_type'],
-            'join_date'    => $validated['join_date'],
+            'user_id' => $user->id,
+            'gender' => $validated['gender'],
+            'member_type' => $validated['member_type'],
+            'join_date' => $validated['join_date'],
             'expired_date' => $validated['join_date'],
-            'no_whatsapp'  => $validated['no_whatsapp'],
-            'status'       => (bool) $validated['status'],
+            'no_whatsapp' => $validated['no_whatsapp'],
+            'status' => (bool) $validated['status'],
         ]);
 
         session()->flash('success', 'Member berhasil ditambahkan');
@@ -90,17 +90,17 @@ class MembershipForm extends Component
         $validated = $this->validate();
 
         $this->membership->update([
-            'gender'       => $validated['gender'],
-            'member_type'  => $validated['member_type'],
-            'join_date'    => $validated['join_date'],
-            'no_whatsapp'  => $validated['no_whatsapp'],
-            'status'       => (bool) $validated['status'],
+            'gender' => $validated['gender'],
+            'member_type' => $validated['member_type'],
+            'join_date' => $validated['join_date'],
+            'no_whatsapp' => $validated['no_whatsapp'],
+            'status' => (bool) $validated['status'],
         ]);
 
         $user_id = $this->membership->user_id;
         User::find($user_id)->update([
-            'name'     => $validated['name'],
-            'email'    => $validated['email'],
+            'name' => $validated['name'],
+            'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
 

@@ -16,4 +16,14 @@ enum RoleType: string
             static::USER => 'User',
         };
     }
+
+    public function fromValue(string $value): self
+    {
+        return match ($value) {
+            static::SUPER_ADMIN => static::SUPER_ADMIN,
+            static::ADMIN => static::ADMIN,
+            static::USER => static::USER,
+            default => static::USER,
+        };
+    }
 }

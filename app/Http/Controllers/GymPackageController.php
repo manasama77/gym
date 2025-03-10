@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GymPackage;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreGymPackageRequest;
 use App\Http\Requests\UpdateGymPackageRequest;
 
@@ -11,9 +12,20 @@ class GymPackageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $title = 'Manage Admin';
+        $keyword = $request->keyword ?? null;
+
+        $gym_packages = GymPackage::where(function ($query) use ($keyword) {
+            $query
+                ->where('name', 'like', '%' . $keyword . '%')
+                ->orWhere('price', 'like', '%' . $keyword . '%');
+        })
+            ->paginate(5)
+            ->withQueryString();
+
+        return view('pages.manage_paket.main', compact('title', 'keyword', 'gym_packages'));
     }
 
     /**
@@ -21,7 +33,8 @@ class GymPackageController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Paket';
+        return view('pages.manage_paket.form', compact('title'));
     }
 
     /**
@@ -43,9 +56,10 @@ class GymPackageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(GymPackage $gymPackage)
+    public function edit(GymPackage $gym_package)
     {
-        //
+        $title = 'Edit Paket';
+        return view('pages.manage_paket.form_edit', compact('title', 'gym_package'));
     }
 
     /**
@@ -59,8 +73,9 @@ class GymPackageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(GymPackage $gymPackage)
+    public function destroy(GymPackage $gym_package)
     {
-        //
+        $gym_package->delete();
+        return redirect()->route('manage-paket')->with('success', 'Gym Paket berhasil dihapus');
     }
 }

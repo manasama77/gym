@@ -23,42 +23,42 @@
             </thead>
             <tbody>
                 @foreach ($memberships as $membership)
-                    <tr>
-                        <td class="text-nowrap flex justify-center gap-1">
-                            <a href="{{ route('membership.edit', $membership) }}" class="btn btn-sm btn-primary">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button type="button" class="btn btn-sm btn-error"
-                                onclick="deleteMembership({{ $membership->id }}, '{{ $membership->user->name }}')">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            <form id="delete-form-{{ $membership->id }}"
-                                action="{{ route('membership.destroy', $membership) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="hidden">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                            <button class="btn btn-sm btn-info"
-                                onclick="showResetModal({{ $membership->user->id }}, '{{ $membership->user->email }}')">
-                                <i class="fas fa-key"></i>
-                            </button>
-                        </td>
-                        <td class="text-nowrap">{{ $membership->user->name }}</td>
-                        <td class="text-nowrap">{{ $membership->user->email }}</td>
-                        <td class="text-nowrap">{{ $membership->no_whatsapp }}</td>
-                        <td>{{ $membership->gender->label() }}</td>
-                        <td>{{ $membership->member_type->label() }}</td>
-                        <td>{{ $membership->join_date }}</td>
-                        <td>{{ $membership->expired_date }}</td>
-                        <td class="text-nowrap text-center">
-                            @php
-                                $badge_color = $membership->getRawOriginal('status') ? 'badge-success' : 'badge-error';
-                            @endphp
-                            <div class="badge badge-xs {{ $badge_color }}">{{ $membership->status }}</div>
-                        </td>
-                    </tr>
+                                <tr>
+                                    <td class="text-nowrap flex justify-center gap-1">
+                                        <a href="{{ route('membership.edit', $membership) }}" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-error"
+                                            onclick="deleteMembership({{ $membership->id }}, '{{ $membership->user->name }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        <form id="delete-form-{{ $membership->id }}"
+                                            action="{{ route('membership.destroy', $membership) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="hidden">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        <button class="btn btn-sm btn-info"
+                                            onclick="showResetModal({{ $membership->user->id }}, '{{ $membership->user->email }}')">
+                                            <i class="fas fa-key"></i>
+                                        </button>
+                                    </td>
+                                    <td class="text-nowrap">{{ $membership->user->name }}</td>
+                                    <td class="text-nowrap">{{ $membership->user->email }}</td>
+                                    <td class="text-nowrap">{{ $membership->no_whatsapp }}</td>
+                                    <td>{{ $membership->gender->label() }}</td>
+                                    <td>{{ $membership->member_type->label() }}</td>
+                                    <td>{{ $membership->join_date->format('d F Y') }}</td>
+                                    <td>{{ $membership->expired_date->format('d F Y') }}</td>
+                                    <td class="text-nowrap text-center">
+                                        @php
+                                            $badge_color = $membership->getRawOriginal('status') ? 'badge-success' : 'badge-error';
+                                        @endphp
+                                        <div class="badge badge-xs {{ $badge_color }}">{{ $membership->status }}</div>
+                                    </td>
+                                </tr>
                 @endforeach
             </tbody>
         </table>

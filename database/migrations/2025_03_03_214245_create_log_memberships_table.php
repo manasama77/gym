@@ -3,6 +3,7 @@
 use App\Models\GymPackage;
 use App\Models\Membership;
 use App\LogMembershipStatusType;
+use App\MemberType;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -18,8 +19,12 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Membership::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(GymPackage::class)->constrained()->cascadeOnDelete();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('gym_package_name');
+            $table->integer('price');
+            $table->integer('duration');
+            $table->enum('member_type', array_column(MemberType::cases(), 'value'));
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->enum('status', array_column(LogMembershipStatusType::cases(), 'value'));
             $table->timestamps();
         });

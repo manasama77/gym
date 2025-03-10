@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carousel;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreCarouselRequest;
 use App\Http\Requests\UpdateCarouselRequest;
 
@@ -11,9 +12,19 @@ class CarouselController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $title = 'Manage Carousel';
+        $keyword = $request->keyword ?? null;
+
+        $carousels = Carousel::where(function ($query) use ($keyword) {
+            $query
+                ->where('name', 'like', '%' . $keyword . '%');
+        })
+            ->paginate(5)
+            ->withQueryString();
+
+        return view('pages.manage_carousel.main', compact('title', 'keyword', 'carousels'));
     }
 
     /**
@@ -21,7 +32,8 @@ class CarouselController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Carousel';
+        return view('pages.manage_carousel.form', compact('title'));
     }
 
     /**

@@ -26,8 +26,10 @@ class Membership extends Model
     ];
 
     protected $casts = [
-        'gender'      => GenderType::class,
+        'gender' => GenderType::class,
         'member_type' => MemberType::class,
+        'join_date' => 'date',
+        'expired_date' => 'date',
     ];
 
     public function getStatusAttribute($value): string
@@ -37,7 +39,7 @@ class Membership extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->orderBy('name', 'asc');
     }
 
     public function logMembership(): HasMany

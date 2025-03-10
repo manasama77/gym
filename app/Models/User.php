@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\RoleType;
 use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -63,5 +65,18 @@ class User extends Authenticatable
     public function memberships(): HasOne
     {
         return $this->hasOne(Membership::class);
+    }
+
+    public function getRoleNameAttribute()
+    {
+        if ($this->hasRole(RoleType::SUPER_ADMIN)) {
+            return RoleType::SUPER_ADMIN->label();
+        } elseif ($this->hasRole(RoleType::ADMIN)) {
+            return RoleType::ADMIN->label();
+        } elseif ($this->hasRole(RoleType::USER)) {
+            return RoleType::USER->label();
+        } else {
+            return "Tidak ada Role";
+        }
     }
 }

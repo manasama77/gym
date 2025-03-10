@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-layouts.app :title="$title">
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         <h1 class="text-2xl font-bold">Dashboard</h1>
         <div class="grid auto-rows-min gap-4 md:grid-cols-3">

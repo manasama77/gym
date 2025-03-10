@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
-import tailwindcssAnimated from "tailwindcss-animated";
+// import tailwindcssAnimated from "tailwindcss-animated";
 export default defineConfig({
     content: ["./node_modules/flyonui/dist/js/*.js"],
     plugins: [
@@ -10,7 +10,7 @@ export default defineConfig({
             refresh: [`resources/views/**/*`],
         }),
         tailwindcss(),
-        tailwindcssAnimated(),
+        // tailwindcssAnimated(),
     ],
     server: {
         cors: true,

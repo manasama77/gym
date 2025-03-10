@@ -16,28 +16,32 @@
 
         <flux:navlist variant="outline">
             <flux:navlist.group heading="Menu" class="grid ">
-                <flux:navlist.item icon="home" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate class="mb-2">
+                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+                    wire:navigate class="mb-2">
                     {{ __('Dashboard') }}
                 </flux:navlist.item>
                 <flux:navlist.item icon="user-group" :href="route('membership')"
                     :current="request()->routeIs('membership')" wire:navigate class="mb-2">
                     {{ __('Membership') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="home" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate class="mb-2">
+                <flux:navlist.item icon="bookmark" :href="route('extend-membership')"
+                    :current="request()->routeIs('extend-membership')" wire:navigate class="mb-2">
                     {{ __('Extend Membership') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="home" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate class="mb-2">
+                <flux:navlist.item icon="user-circle" :href="route('manage-admin')"
+                    :current="request()->routeIs('manage-admin')" wire:navigate class="mb-2">
                     {{ __('Manage Admin') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="home" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate class="mb-2">
+                <flux:navlist.item icon="rectangle-stack" :href="route('manage-paket')"
+                    :current="request()->routeIs('manage-paket')" wire:navigate class="mb-2">
                     {{ __('Manage Paket') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="home" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate class="mb-2">
+                <flux:navlist.item icon="photo" :href="route('manage-carousel')"
+                    :current="request()->routeIs('manage-carousel')" wire:navigate class="mb-2">
+                    {{ __('Manage Carousel') }}
+                </flux:navlist.item>
+                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+                    wire:navigate class="mb-2">
                     {{ __('Manage Info Gym') }}
                 </flux:navlist.item>
             </flux:navlist.group>
