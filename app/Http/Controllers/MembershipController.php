@@ -17,7 +17,7 @@ class MembershipController extends Controller
      */
     public function index(Request $request)
     {
-        $title   = 'Membership';
+        $title = 'Membership';
         $keyword = $request->keyword ?? null;
 
         $memberships = Membership::with('user')
@@ -38,7 +38,7 @@ class MembershipController extends Controller
      */
     public function create()
     {
-        $title   = 'Tambah Member';
+        $title = 'Tambah Member';
         return view('pages.membership.form', compact('title'));
     }
 
@@ -64,7 +64,7 @@ class MembershipController extends Controller
     public function edit(Membership $membership)
     {
         $title = 'Edit Member';
-        return view('pages.membership.form', compact('title', 'membership'));
+        return view('pages.membership.form_edit', compact('title', 'membership'));
     }
 
     /**
@@ -95,8 +95,8 @@ class MembershipController extends Controller
         $validator = Validator::make($request->all(), [
             'password' => ['required', 'min:8', 'confirmed'],
         ], [
-            'password.required'  => 'Password harus diisi',
-            'password.min'       => 'Password harus memiliki minimal 8 karakter',
+            'password.required' => 'Password harus diisi',
+            'password.min' => 'Password harus memiliki minimal 8 karakter',
             'password.confirmed' => 'Password tidak sama',
         ]);
 

@@ -71,35 +71,6 @@
         </fieldset>
 
         <fieldset class="fieldset">
-            <legend class="fieldset-legend">Password</legend>
-            <div class="join" x-data="{ showPassword: false }">
-                <input :type="showPassword ? 'text' : 'password'" class="input w-full rounded-l-full"
-                    wire:model="password" />
-                <div class="validator-hint hidden">xxxx</div>
-                <button type="button" class="btn btn-neutral join-item" @click="showPassword = !showPassword">
-                    <i class="fas fa-eye fa-fw" x-show="showPassword"></i>
-                    <i class="fas fa-eye-slash fa-fw" x-show="!showPassword"></i>
-                </button>
-            </div>
-            @error('password')
-                <div class="text-error ml-2">{{ $message ?? '-' }}</div>
-            @enderror
-        </fieldset>
-
-        <fieldset class="fieldset">
-            <legend class="fieldset-legend">Konfirmasi Password</legend>
-            <div class="join" x-data="{ showPassword: false }">
-                <input :type="showPassword ? 'text' : 'password'" class="input w-full rounded-l-full"
-                    wire:model="password_confirmation" />
-                <div class="validator-hint hidden">xxxx</div>
-                <button type="button" class="btn btn-neutral join-item" @click="showPassword = !showPassword">
-                    <i class="fas fa-eye fa-fw" x-show="showPassword"></i>
-                    <i class="fas fa-eye-slash fa-fw" x-show="!showPassword"></i>
-                </button>
-            </div>
-        </fieldset>
-
-        <fieldset class="fieldset">
             <legend class="fieldset-legend">Status Member</legend>
             <select class="select w-full" wire:model="status">
                 <option value="1">

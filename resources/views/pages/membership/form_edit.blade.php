@@ -20,7 +20,7 @@
             </div>
         @endif
 
-        <livewire:membership-form />
+        <livewire:form-edit-member :membership="$membership" />
 
 
     </div>
