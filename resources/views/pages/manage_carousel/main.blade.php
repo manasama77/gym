@@ -52,7 +52,7 @@
                     @foreach ($carousels as $carousel)
                         <tr>
                             <td>
-                                <div class="flex items-center justify-center">
+                                <div class="flex items-center justify-center gap-1">
                                     <div>
                                         <a href="{{ route('manage-carousel.edit', $carousel) }}"
                                             class="btn btn-sm btn-success" title="Edit Carousel">

@@ -57,7 +57,8 @@ class CarouselController extends Controller
      */
     public function edit(Carousel $carousel)
     {
-        //
+        $title = 'Edit Carousel';
+        return view('pages.manage_carousel.form_edit', compact('title', 'carousel'));
     }
 
     /**
@@ -73,6 +74,7 @@ class CarouselController extends Controller
      */
     public function destroy(Carousel $carousel)
     {
-        //
+        $carousel->delete();
+        return redirect()->route('manage-carousel')->with('success', 'Carousel berhasil dihapus');
     }
 }
