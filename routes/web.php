@@ -52,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('manage-admin/create', [ManageAdminController::class, 'create'])->name('manage-admin.create');
     Route::get('manage-admin/edit/{user}', [ManageAdminController::class, 'edit'])->name('manage-admin.edit');
     Route::delete('manage-admin/destroy/{user}', [ManageAdminController::class, 'destroy'])->name('manage-admin.destroy');
+    Route::post('manage-admin/reset-password/{id}', [ManageAdminController::class, 'reset_password'])->name('manage-admin.reset-password');
 
     Route::get('manage-paket', [GymPackageController::class, 'index'])->name('manage-paket');
     Route::get('manage-paket/create', [GymPackageController::class, 'create'])->name('manage-paket.create');
