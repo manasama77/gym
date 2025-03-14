@@ -13,7 +13,9 @@ class InfoGymController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Info Gym';
+
+        return view('pages.info_gym.form', compact('title'));
     }
 
     /**

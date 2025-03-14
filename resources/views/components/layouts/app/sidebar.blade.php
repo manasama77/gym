@@ -40,7 +40,7 @@
                     :current="request()->routeIs('manage-carousel')" wire:navigate class="mb-2">
                     {{ __('Manage Carousel') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+                <flux:navlist.item icon="home" :href="route('info-gym')" :current="request()->routeIs('info-gym')"
                     wire:navigate class="mb-2">
                     {{ __('Manage Info Gym') }}
                 </flux:navlist.item>
@@ -63,7 +63,7 @@
         <!-- Desktop User Menu -->
         <flux:dropdown position="bottom" align="start">
             <flux:profile :name="auth()->user()->name" :initials="auth()->user()->initials()"
-                icon-trailing="chevrons-up-down" />
+                icon-trailing="chevrons-up-down" class="text-white" />
 
             <flux:menu class="w-[220px]">
                 <flux:menu.radio.group>
@@ -71,7 +71,7 @@
                         <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                             <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
                                 <span
-                                    class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
+                                    class="flex h-full w-full items-center justify-center rounded-lg bg-white text-black dark:bg-black dark:text-white">
                                     {{ auth()->user()->initials() }}
                                 </span>
                             </span>
