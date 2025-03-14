@@ -6,7 +6,11 @@ export default defineConfig({
     content: ["./node_modules/flyonui/dist/js/*.js"],
     plugins: [
         laravel({
-            input: ["resources/css/app.css", "resources/js/app.js"],
+            input: [
+                "resources/css/landing.css",
+                "resources/css/app.css",
+                "resources/js/app.js",
+            ],
             refresh: [`resources/views/**/*`],
         }),
         tailwindcss(),

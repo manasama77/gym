@@ -10,12 +10,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GymPackageController;
 use App\Http\Controllers\InfoGymController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\LogMembershipController;
 
-Route::get('/', function (): View {
-    return view('welcome');
-})->name('home');
+Route::get('/', [LandingController::class, 'index'])->name('home');
 
 
 Route::middleware(['auth'])->group(function () {
