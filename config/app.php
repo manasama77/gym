@@ -125,4 +125,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'tinymce_api_key' => env('TINYMCE_API_KEY'),
+
 ];

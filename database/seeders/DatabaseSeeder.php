@@ -23,57 +23,39 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // create new role
+        // INIT DATA ROLE START
         Role::create([
             'name' => RoleType::SUPER_ADMIN->value,
         ]);
-
         Role::create([
             'name' => RoleType::ADMIN->value,
         ]);
-
         Role::create([
             'name' => RoleType::USER->value,
         ]);
+        // INIT DATA ROLE END
 
-
+        // INIT DATA SUPER ADMIN START
         User::factory()->create([
-            'name'     => 'Super Admin',
-            'email'    => 'super_admin@gym.com',
+            'name' => 'Super Admin',
+            'email' => 'super_admin@gym.com',
             'password' => Hash::make('password'),
         ])->assignRole(RoleType::SUPER_ADMIN->value);
+        // INIT DATA SUPER ADMIN END
 
+        // INIT DATA ADMIN START
         User::factory()->create([
-            'name'     => 'Admin',
-            'email'    => 'admin@gym.com',
+            'name' => 'Admin',
+            'email' => 'admin@gym.com',
             'password' => Hash::make('password'),
         ])->assignRole(RoleType::ADMIN->value);
+        // INIT DATA ADMIN START
 
+        // INIT GYM PACKAGE & DEFAULT INFO GYM START
         $this->call([
             GymPackageSeeder::class,
             InfoGymSeeder::class,
         ]);
-
-        User::factory(10)->create()->each(function ($user) {
-            $user->assignRole(RoleType::USER->value);
-
-            Membership::factory()->create([
-                'user_id' => $user->id,
-            ])->each(function ($membership) {
-                $member_type        = $membership->member_type;
-                $gymPackageFiltered = GymPackage::where('member_type', $member_type)->first();
-
-                LogMembership::factory()->create([
-                    'membership_id'  => $membership->id,
-                    'gym_package_id' => $gymPackageFiltered->id,
-                    'price'          => $gymPackageFiltered->price,
-                    'duration'       => $gymPackageFiltered->duration,
-                    'member_type'    => $gymPackageFiltered->member_type->value,
-                    'start_date'     => Carbon::now(),
-                    'end_date'       => Carbon::now(),
-                    'status'         => LogMembershipStatusType::UNPAID->value,
-                ]);
-            });
-        });
+        // INIT GYM PACKAGE & DEFAULT INFO GYM END
     }
 }

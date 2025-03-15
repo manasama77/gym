@@ -13,8 +13,10 @@ class InfoGymSeeder extends Seeder
      */
     public function run(): void
     {
+        $base_info_gym = view('base_info_gym')->render();
+
         InfoGym::create([
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+            'description' => $base_info_gym,
         ]);
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Tiptap\Editor;
 use App\Models\InfoGym;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreInfoGymRequest;
 use App\Http\Requests\UpdateInfoGymRequest;
 
@@ -15,7 +17,9 @@ class InfoGymController extends Controller
     {
         $title = 'Info Gym';
 
-        return view('pages.info_gym.form', compact('title'));
+        $description = InfoGym::find(1)->description;
+
+        return view('pages.info_gym.form', compact('title', 'description'));
     }
 
     /**
@@ -53,9 +57,13 @@ class InfoGymController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInfoGymRequest $request, InfoGym $infoGym)
+    public function update(Request $request)
     {
-        //
+        $info_gym = InfoGym::find(1);
+        $info_gym->description = $request->description;
+        $info_gym->save();
+
+        return redirect()->route('info-gym')->with('success', 'Info Gym berhasil diperbarui');
     }
 
     /**

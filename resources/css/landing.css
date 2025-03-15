@@ -1,44 +1,30 @@
 @import "tailwindcss";
 @import "tailwindcss-animated";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@plugin "flowbite-typography";
+@source "../../node_modules/flowbite";
 
 @source "../views";
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
-@plugin "daisyui" {
-    themes: dark --prefersdark, coffee;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-primary-50: oklch(98.32% 0.0183 86.15);
+    --color-primary-100: oklch(96.13% 0.0432 86.59);
+    --color-primary-200: oklch(91.66% 0.083 82.48);
+    --color-primary-300: oklch(86.17% 0.1267 78.17);
+    --color-primary-400: oklch(79.06% 0.1614 66.37);
+    --color-primary-500: oklch(74.12% 0.1816 55.25);
+    --color-primary-600: oklch(69.06% 0.1963 45.33);
+    --color-primary-700: oklch(57.2% 0.1708 42.56);
+    --color-primary-800: oklch(49.64% 0.146 41.6);
+    --color-primary-900: oklch(27.94% 0.0786 42.44);
 }
 
-@plugin "daisyui/theme" {
-    name: "coffee";
-    default: true;
-    prefersdark: true;
-    color-scheme: "dark";
-    --color-base-100: oklch(98% 0.026 102.212);
-    --color-base-200: oklch(97% 0.071 103.193);
-    --color-base-300: oklch(94% 0.129 101.54);
-    --color-base-content: oklch(42% 0.095 57.708);
-    --color-primary: oklch(69% 0.17 162.48);
-    --color-primary-content: oklch(97% 0.021 166.113);
-    --color-secondary: oklch(44% 0.017 285.786);
-    --color-secondary-content: oklch(96% 0.018 272.314);
-    --color-accent: oklch(72% 0.219 149.579);
-    --color-accent-content: oklch(98% 0.018 155.826);
-    --color-neutral: oklch(68% 0.162 75.834);
-    --color-neutral-content: oklch(98% 0.026 102.212);
-    --color-info: oklch(58% 0.158 241.966);
-    --color-info-content: oklch(97% 0.013 236.62);
-    --color-success: oklch(59% 0.145 163.225);
-    --color-success-content: oklch(97% 0.021 166.113);
-    --color-warning: oklch(64% 0.222 41.116);
-    --color-warning-content: oklch(98% 0.016 73.684);
-    --color-error: oklch(58% 0.253 17.585);
-    --color-error-content: oklch(96% 0.015 12.422);
-    --radius-selector: 0.25rem;
-    --radius-field: 2rem;
-    --radius-box: 1rem;
-    --size-selector: 0.25rem;
-    --size-field: 0.25rem;
-    --border: 1px;
-    --depth: 1;
-    --noise: 0;
+html,
+body {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem !important;
 }

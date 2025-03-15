@@ -1,14 +1,14 @@
 <?php
 
 use App\GenderType;
+use App\MembershipStatus;
 use App\MemberType;
 use App\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('join_date');
             $table->date('expired_date');
             $table->string('no_whatsapp');
-            $table->boolean('status')->default(false);
+            $table->enum('status', array_column(MembershipStatus::cases(), 'value'))->default(MembershipStatus::NEW ->value);
             $table->timestamps();
         });
     }

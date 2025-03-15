@@ -8,8 +8,10 @@ export default defineConfig({
         laravel({
             input: [
                 "resources/css/landing.css",
+                "resources/css/tiptap.css",
                 "resources/css/app.css",
                 "resources/js/app.js",
+                "resources/js/tiptap.js",
             ],
             refresh: [`resources/views/**/*`],
         }),

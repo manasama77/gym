@@ -15,6 +15,8 @@ use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\LogMembershipController;
 
 Route::get('/', [LandingController::class, 'index'])->name('home');
+Route::get('/register-new-member', [LandingController::class, 'store'])->name('home.store');
+Route::get('/registration-success', [LandingController::class, 'success'])->name('home.success');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -65,11 +67,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('manage-carousel/destroy/{carousel}', [CarouselController::class, 'destroy'])->name('manage-carousel.destroy');
 
     Route::get('info-gym', [InfoGymController::class, 'index'])->name('info-gym');
-    Route::get('info-gym/create', [InfoGymController::class, 'create'])->name('info-gym.create');
-    Route::get('info-gym/edit/{carousel}', [InfoGymController::class, 'edit'])->name('info-gym.edit');
-    Route::delete('info-gym/destroy/{carousel}', [InfoGymController::class, 'destroy'])->name('info-gym.destroy');
-
-
+    Route::post('info-gym/update', [InfoGymController::class, 'update'])->name('info-gym.update');
 
     Route::redirect('settings', 'settings/profile');
 
