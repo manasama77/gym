@@ -20,45 +20,38 @@
                     wire:navigate class="mb-2">
                     {{ __('Dashboard') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="user-group" :href="route('membership')"
-                    :current="request()->routeIs('membership')" wire:navigate class="mb-2">
-                    {{ __('Membership') }}
-                </flux:navlist.item>
+                @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('super_admin'))
+                    <flux:navlist.item icon="user-group" :href="route('membership')"
+                        :current="request()->routeIs('membership')" wire:navigate class="mb-2">
+                        {{ __('Membership') }}
+                    </flux:navlist.item>
+                @endif
                 <flux:navlist.item icon="bookmark" :href="route('extend-membership')"
                     :current="request()->routeIs('extend-membership')" wire:navigate class="mb-2">
                     {{ __('Extend Membership') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="user-circle" :href="route('manage-admin')"
-                    :current="request()->routeIs('manage-admin')" wire:navigate class="mb-2">
-                    {{ __('Manage Admin') }}
-                </flux:navlist.item>
-                <flux:navlist.item icon="rectangle-stack" :href="route('manage-paket')"
-                    :current="request()->routeIs('manage-paket')" wire:navigate class="mb-2">
-                    {{ __('Manage Paket') }}
-                </flux:navlist.item>
-                <flux:navlist.item icon="photo" :href="route('manage-carousel')"
-                    :current="request()->routeIs('manage-carousel')" wire:navigate class="mb-2">
-                    {{ __('Manage Carousel') }}
-                </flux:navlist.item>
-                <flux:navlist.item icon="home" :href="route('info-gym')" :current="request()->routeIs('info-gym')"
-                    wire:navigate class="mb-2">
-                    {{ __('Manage Info Gym') }}
-                </flux:navlist.item>
+                @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('super_admin'))
+                    <flux:navlist.item icon="user-circle" :href="route('manage-admin')"
+                        :current="request()->routeIs('manage-admin')" wire:navigate class="mb-2">
+                        {{ __('Manage Admin') }}
+                    </flux:navlist.item>
+                    <flux:navlist.item icon="rectangle-stack" :href="route('manage-paket')"
+                        :current="request()->routeIs('manage-paket')" wire:navigate class="mb-2">
+                        {{ __('Manage Paket') }}
+                    </flux:navlist.item>
+                    <flux:navlist.item icon="photo" :href="route('manage-carousel')"
+                        :current="request()->routeIs('manage-carousel')" wire:navigate class="mb-2">
+                        {{ __('Manage Carousel') }}
+                    </flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('info-gym')" :current="request()->routeIs('info-gym')"
+                        wire:navigate class="mb-2">
+                        {{ __('Manage Info Gym') }}
+                    </flux:navlist.item>
+                @endif
             </flux:navlist.group>
         </flux:navlist>
 
         <flux:spacer />
-
-        <flux:navlist variant="outline">
-            <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit"
-                target="_blank">
-                {{ __('Repository') }}
-            </flux:navlist.item>
-
-            <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
-                {{ __('Documentation') }}
-            </flux:navlist.item>
-        </flux:navlist>
 
         <!-- Desktop User Menu -->
         <flux:dropdown position="bottom" align="start">

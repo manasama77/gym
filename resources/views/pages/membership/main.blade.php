@@ -12,10 +12,10 @@
 
         @if (session()->has('success'))
             <div class="toast toast-end z-50" x-data="{
-                    showToast: true,
-                    type: 'success',
-                    message: '{{ session('success') }}',
-                }" x-init="setTimeout(() => { $el.classList.add('animate-jump-out') }, 3000)">
+                        showToast: true,
+                        type: 'success',
+                        message: '{{ session('success') }}',
+                    }" x-init="setTimeout(() => { $el.classList.add('animate-jump-out') }, 3000)">
                 <div class="alert alert-success">
                     <span>
                         <i class="fas fa-check-circle"></i>

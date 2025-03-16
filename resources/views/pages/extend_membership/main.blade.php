@@ -11,11 +11,8 @@
         </div>
 
         @if (session()->has('success'))
-            <div class="toast toast-end z-50" x-data="{
-                                                                                                        showToast: true,
-                                                                                                        type: 'success',
-                                                                                                        message: '{{ session('success') }}',
-                                                                                                    }"
+            <div class="toast toast-end z-50"
+                x-data="{ showToast: true, type: 'success', message: '{{ session('success') }}' }"
                 x-init="setTimeout(() => { $el.classList.add('animate-jump-out') }, 3000)">
                 <div class="alert alert-success">
                     <span>
@@ -26,50 +23,77 @@
             </div>
         @endif
 
-        <form action="{{ route('extend-membership') }}" method="get" class="flex gap-2 mb-5">
-            <label class="input">
-                <i class="fas fa-search h-[1em] opacity-50"></i>
-                <input type="search" id="keyword" name="keyword" placeholder="Cari Member" value="{{ $keyword }}" />
-            </label>
-        </form>
+        @if(!auth()->user()->hasRole('user'))
+            <form action="{{ route('extend-membership') }}" method="get" class="flex gap-2 mb-5">
+                <label class="input">
+                    <i class="fas fa-search h-[1em] opacity-50"></i>
+                    <input type="search" id="keyword" name="keyword" placeholder="Cari Member" value="{{ $keyword }}" />
+                </label>
+            </form>
+        @endif
 
         <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-200 mb-5">
             <table class="table table-compact table-pin-rows">
                 <thead>
                     <tr>
-                        <th class="text-center"><i class="fas fa-cogs"></i></th>
+                        @if(!auth()->user()->hasRole('user'))
+                            <th class="text-center"><i class="fas fa-cogs"></i></th>
+                        @endif
                         <th>Tanggal Request</th>
                         <th>Nama Member</th>
                         <th>Jenis Membership</th>
                         <th>Paket Extend</th>
                         <th>Durasi</th>
+                        <th>Start</th>
+                        <th>End</th>
                         <th>Total Harga</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @if($extend_memberships->isEmpty())
+                        <tr>
+                            <td colspan="8" class="text-center">Tidak ada data</td>
+                        </tr>
+                    @endif
                     @foreach ($extend_memberships as $extend_membership)
                         <tr>
-                            <td class="text-nowrap flex justify-center gap-1">
-                                @if($extend_membership->getRawOriginal('status') === App\LogMembershipStatusType::UNPAID->value)
-                                    <button class="btn btn-sm btn-success"
-                                        onclick="confirmApproveReject({{ $extend_membership->id }}, '{{ $extend_membership->membership->user->name }}', 'approve')"
-                                        title="TERIMA">
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-warning"
-                                        onclick="confirmApproveReject({{ $extend_membership->id }}, '{{ $extend_membership->membership->user->name }}', 'reject')"
-                                        title="TOLAK">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                @endif
-                            </td>
+                            @if(!auth()->user()->hasRole('user'))
+                                <td class="text-nowrap flex justify-center gap-1">
+                                    @if($extend_membership->getRawOriginal('status') === App\LogMembershipStatusType::UNPAID->value)
+                                        <button class="btn btn-sm btn-success"
+                                            onclick="confirmApproveReject('{{ $extend_membership->id }}', '{{ $extend_membership->membership->user->name }}', 'approve')"
+                                            title="TERIMA">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-warning"
+                                            onclick="confirmApproveReject('{{ $extend_membership->id }}', '{{ $extend_membership->membership->user->name }}', 'reject')"
+                                            title="TOLAK">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    @endif
+                                </td>
+                            @endif
                             <td class="text-nowrap">{{ $extend_membership->created_at }}</td>
                             <td class="text-nowrap">{{ $extend_membership->membership->user->name }}</td>
                             <td class="text-nowrap">{{ $extend_membership->membership->member_type->label() }}</td>
                             <td class="text-nowrap">{{ $extend_membership->gymPackage->name }}</td>
                             <td class="text-nowrap">{{ $extend_membership->duration }} Bulan</td>
-                            <td class="text-nowrap">{{ number_format($extend_membership->price, 0, ',', '.') }}</td>
+                            <td class="text-nowrap">
+                                @if($extend_membership->status->value == App\LogMembershipStatusType::PAID->value)
+                                    {{ $extend_membership->start_date->format('d F Y') }}
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td class="text-nowrap">
+                                @if($extend_membership->status->value == App\LogMembershipStatusType::PAID->value)
+                                    {{ $extend_membership->end_date->format('d F Y') }}
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td class="text-nowrap">Rp. {{ number_format($extend_membership->price, 0, ',', '.') }}</td>
                             <td>
                                 {!! $extend_membership->status_badge !!}
                             </td>

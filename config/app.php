@@ -126,5 +126,7 @@ return [
     ],
 
     'tinymce_api_key' => env('TINYMCE_API_KEY'),
+    'admin_wa' => env('ADMIN_WA'),
+    'admin_wa_link' => env('ADMIN_WA_LINK'),
 
 ];

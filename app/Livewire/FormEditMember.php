@@ -46,7 +46,7 @@ class FormEditMember extends Component
         $this->join_date = $membership->join_date->format('Y-m-d') ?? now()->format('Y-m-d');
         $this->no_whatsapp = $membership->no_whatsapp ?? '';
         $this->email = $membership->user->email ?? '';
-        $this->status = $membership->getRawOriginal('status') ? "1" : "0";
+        $this->status = $membership->getRawOriginal('status');
     }
 
     public function save()
@@ -58,7 +58,7 @@ class FormEditMember extends Component
             'member_type' => $validated['member_type'],
             'join_date' => $validated['join_date'],
             'no_whatsapp' => $validated['no_whatsapp'],
-            'status' => (bool) $validated['status'],
+            'status' => $validated['status'],
         ]);
 
         $user_id = $this->membership->user_id;

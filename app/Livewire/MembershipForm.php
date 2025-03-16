@@ -54,7 +54,7 @@ class MembershipForm extends Component
         $this->email = '';
         $this->password = '';
         $this->password_confirmation = '';
-        $this->status = "0";
+        $this->status = 'active';
     }
 
     public function save()
@@ -75,7 +75,7 @@ class MembershipForm extends Component
             'join_date' => $validated['join_date'],
             'expired_date' => $validated['join_date'],
             'no_whatsapp' => $validated['no_whatsapp'],
-            'status' => (bool) $validated['status'],
+            'status' => $validated['status'],
         ]);
 
         session()->flash('success', 'Member berhasil ditambahkan');

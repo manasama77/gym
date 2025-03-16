@@ -21,6 +21,7 @@ class MembershipController extends Controller
         $keyword = $request->keyword ?? null;
 
         $memberships = Membership::with('user')
+            ->orderBy('status', 'desc')
             ->orderBy('expired_date', 'desc')
             ->whereHas('user', function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->keyword . '%')

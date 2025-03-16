@@ -36,7 +36,7 @@ class GymPackageSeeder extends Seeder
         ]);
 
         GymPackage::create([
-            'name' => 'Paket Non Penghuni 1',
+            'name' => 'Paket Non Penghuni 1 Bulan',
             'price' => 100_000,
             'duration' => 1,
             'member_type' => MemberType::NON_PENGHUNI,

@@ -25,11 +25,14 @@ class CardDashboard extends Component
 
         if ($this->type === 'total_member_aktif') {
             $this->title = "TOTAL MEMBER AKTIF";
-            $this->value = $memberships->where('status', true)->count();
+            $this->value = $memberships->where('status', 'active')->count();
         } elseif ($this->type === 'total_member_non_aktif') {
-            $this->title = "TOTAL MEMBER NON AKTIF";
-            $this->value = $memberships->where('status', false)->count();
-        } elseif ($this->type  === 'total_request_extend_membership') {
+            $this->title = "TOTAL MEMBER EXPIRED";
+            $this->value = $memberships->where('status', 'expired')->count();
+        } elseif ($this->type === 'total_member_new') {
+            $this->title = "TOTAL MEMBER BARU";
+            $this->value = $memberships->where('status', 'new')->count();
+        } elseif ($this->type === 'total_request_extend_membership') {
             $this->title = "TOTAL REQUEST EXTEND MEMBERSHIP";
             $this->value = LogMembership::all()->where('status', LogMembershipStatusType::UNPAID->value)->count();
         }

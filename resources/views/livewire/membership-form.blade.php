@@ -102,12 +102,9 @@
         <fieldset class="fieldset">
             <legend class="fieldset-legend">Status Member</legend>
             <select class="select w-full" wire:model="status">
-                <option value="1">
-                    Aktif
-                </option>
-                <option value="0">
-                    Tidak Aktif
-                </option>
+                <option value="active">Aktif</option>
+                <option value="expired">Expired</option>
+                <option value="new">New</option>
             </select>
             @error('status')
                 <div class="text-error ml-2">{{ $message }}</div>

@@ -7,6 +7,7 @@ use App\Models\Membership;
 use Illuminate\Http\Request;
 use App\Models\LogMembership;
 use App\LogMembershipStatusType;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreLogMembershipRequest;
 use App\Http\Requests\UpdateLogMembershipRequest;
 
@@ -29,9 +30,13 @@ class LogMembershipController extends Controller
             ->orderBy('start_date', 'desc')
             ->whereHas('membership.user', function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->keyword . '%');
-            })
-            ->paginate(5)
-            ->withQueryString();
+            });
+
+        if (Auth::user()->role == 'user') {
+            $extend_memberships->where('membership_id', Auth::user()->memberships->id);
+        }
+
+        $extend_memberships = $extend_memberships->paginate(5)->withQueryString();
 
         return view('pages.extend_membership.main', compact('title', 'keyword', 'extend_memberships'));
     }
@@ -45,8 +50,13 @@ class LogMembershipController extends Controller
 
         $memberships = Membership::leftJoin('users', 'users.id', '=', 'memberships.user_id')
             ->select('memberships.*', 'users.name')
-            ->orderBy('users.name', 'asc')
-            ->get();
+            ->orderBy('users.name', 'asc');
+
+        if (Auth::user()->hasRole('user')) {
+            $memberships->where('users.id', Auth::user()->id);
+        }
+
+        $memberships = $memberships->get();
         return view('pages.extend_membership.form', compact('title', 'memberships'));
     }
 

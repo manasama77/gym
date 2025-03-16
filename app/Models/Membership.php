@@ -34,6 +34,21 @@ class Membership extends Model
         'status' => MembershipStatus::class,
     ];
 
+    protected $appends = ['status_badge'];
+
+    public function getStatusBadgeAttribute()
+    {
+        if ($this->status->value == MembershipStatus::ACTIVE->value) {
+            return '<div class="badge badge-success">' . $this->status->label() . '</div>';
+        } elseif ($this->status->value == MembershipStatus::EXPIRED->value) {
+            return '<div class="badge badge-danger">' . $this->status->label() . '</div>';
+        } elseif ($this->status->value == MembershipStatus::NEW ->value) {
+            return '<div class="badge badge-warning">' . $this->status->label() . '</div>';
+        } else {
+            return '<div class="badge badge-info">TIDAK ADA STATUS</div>';
+        }
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->orderBy('name', 'asc');
