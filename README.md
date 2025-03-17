@@ -50,13 +50,25 @@ npm install
 php artisan key:generate
 ```
 
-6. Run migrations
+6. Create Symlink
+
+```bash
+php artisan storage:link
+```
+
+7. Copy .env.example file
+
+```bash
+cp .env.example .env
+```
+
+8. Run migrations
 
 ```bash
 php artisan migrate --seed
 ```
 
-7. Start the server
+9. Start the server
 
 ```bash
 composer run dev
