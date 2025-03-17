@@ -5,16 +5,23 @@
                 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
                 {{ config('app.name') }}<br />GYM & FITNESS
             </h1>
-            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                <b>Royal Fit Gym & Fitness</b> adalah salah satu tempat gym & fitness terlengkap dan termurah di
-                bandung. Kami
-                menyediakan berbagai macam alat fitness dan gym yang lengkap dan modern. Dilengkapi dengan instruktur
-                yang berpengalaman dan ramah, maka pelanggan akan merasa nyaman dan aman saat berlatih di tempat kami.
-                Kami juga memiliki berbagai macam paket yang sesuai dengan kebutuhan dan budget Anda. Dengan berlatih di
-                <b>Royal Fit Gym & Fitness</b>, Anda akan mendapatkan hasil yang maksimal dan kesehatan yang lebih baik.
+            <p
+                class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400 leading-relaxed">
+                <b class="text-primary-500 font-black">Royal Fit Gym & Fitness</b> adalah salah satu tempat gym &
+                fitness
+                terlengkap dan termurah di
+                Bandung.<br />
+                Kami menyediakan berbagai macam alat fitness dan gym yang lengkap dan modern. Dilengkapi dengan
+                instruktur
+                yang berpengalaman dan ramah, maka pelanggan akan merasa nyaman dan aman saat berlatih di tempat
+                kami.<br />
+                Kami juga memiliki berbagai macam paket yang sesuai dengan kebutuhan dan budget Anda. Dengan
+                berlatih di
+                <b class="text-primary-500 font-black">Royal Fit Gym & Fitness</b>, Anda akan mendapatkan hasil yang
+                maksimal dan kesehatan yang lebih baik.
             </p>
             <a href="#" type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center">
+                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 rounded-lg me-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center">
                 Daftar Sekarang
             </a>
             <a href="#"

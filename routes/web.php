@@ -2,10 +2,8 @@
 
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\ManageAdminController;
-use Illuminate\View\View;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Password;
-use App\Livewire\Settings\Appearance;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GymPackageController;

@@ -1,4 +1,4 @@
-<section id="register" class="bg-primary-50 py-10">
+<section id="register" class="py-10">
     <h1 class="text-2xl font-bold text-center mb-4">Registrasi Member</h1>
 
     <form id="form_registrasi" action="{{route('home.store')}}" class="max-w-md mx-auto">

@@ -31,10 +31,12 @@
                     {{ __('Extend Membership') }}
                 </flux:navlist.item>
                 @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('super_admin'))
-                    <flux:navlist.item icon="user-circle" :href="route('manage-admin')"
-                        :current="request()->routeIs('manage-admin')" wire:navigate class="mb-2">
-                        {{ __('Manage Admin') }}
-                    </flux:navlist.item>
+                    @if(auth()->user()->hasRole('super_admin'))
+                        <flux:navlist.item icon="user-circle" :href="route('manage-admin')"
+                            :current="request()->routeIs('manage-admin')" wire:navigate class="mb-2">
+                            {{ __('Manage Admin') }}
+                        </flux:navlist.item>
+                    @endif
                     <flux:navlist.item icon="rectangle-stack" :href="route('manage-paket')"
                         :current="request()->routeIs('manage-paket')" wire:navigate class="mb-2">
                         {{ __('Manage Paket') }}
