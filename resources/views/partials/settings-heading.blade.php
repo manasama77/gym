@@ -1,5 +1,7 @@
 <div class="relative mb-6 w-full">
-    <flux:heading size="xl" level="1">Settings</flux:heading>
-    <flux:subheading size="lg" class="mb-6">{{ __('Manage your profile and account settings') }}</flux:subheading>
-    <flux:separator variant="subtle" />
+    <h1 class="text-2xl font-bold">Settings</h1>
+    <h2 class="text-base">
+        Pengaturan profil akun
+    </h2>
+    <hr class="my-4 border-t border-neutral-300" />
 </div>

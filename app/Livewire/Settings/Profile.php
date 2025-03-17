@@ -14,6 +14,10 @@ class Profile extends Component
 
     public string $email = '';
 
+    public string $gender = '';
+
+    public string $no_whatsapp = '';
+
     /**
      * Mount the component.
      */
@@ -21,6 +25,8 @@ class Profile extends Component
     {
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
+        $this->gender = Auth::user()->memberships->gender->value ?? null;
+        $this->no_whatsapp = Auth::user()->memberships->no_whatsapp ?? null;
     }
 
     /**
@@ -41,13 +47,20 @@ class Profile extends Component
                 'max:255',
                 Rule::unique(User::class)->ignore($user->id),
             ],
+
+            'gender' => ['nullable'],
+            'no_whatsapp' => ['nullable'],
         ]);
 
         $user->fill($validated);
 
-        if ($user->isDirty('email')) {
-            $user->email_verified_at = null;
+        if (Auth::user()->hasRole('user')) {
+            $user->memberships()->update([
+                'gender' => $validated['gender'],
+                'no_whatsapp' => $validated['no_whatsapp'],
+            ]);
         }
+
 
         $user->save();
 
