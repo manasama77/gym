@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Carousel;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CarouselSeeder extends Seeder
 {
@@ -12,6 +13,11 @@ class CarouselSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        for ($i = 1; $i <= 9; $i++) {
+            Carousel::create([
+                'name' => 'Carousel ' . $i,
+                'image' => 'carousel/image' . $i . '.jpg',
+            ]);
+        }
     }
 }

@@ -5,16 +5,16 @@
         </span>
         <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
             <li>
-                <a href="#" class="hover:underline me-4 md:me-6">Info Paket</a>
+                <a href="#info" class="hover:underline me-4 md:me-6">Info Paket</a>
             </li>
             <li>
-                <a href="#" class="hover:underline me-4 md:me-6">Pendaftaran</a>
+                <a href="#register" class="hover:underline me-4 md:me-6">Pendaftaran</a>
             </li>
             <li>
-                <a href="#" class="hover:underline me-4 md:me-6">Kontak</a>
+                <a href="{{ config('app.admin_wa_link') }}" class="hover:underline me-4 md:me-6">Kontak</a>
             </li>
             <li>
-                <a href="#" class="hover:underline">Login</a>
+                <a href="{{ route('login') }}" class="hover:underline">Login</a>
             </li>
         </ul>
     </div>

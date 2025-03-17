@@ -8,6 +8,7 @@ use App\GenderType;
 use App\MemberType;
 use App\Models\User;
 use App\Models\InfoGym;
+use App\Models\Carousel;
 use App\MembershipStatus;
 use App\Models\GymPackage;
 use App\Models\Membership;
@@ -23,7 +24,8 @@ class LandingController extends Controller
     public function index()
     {
         $info_gym = InfoGym::first();
-        return view('home', compact('info_gym'));
+        $carousels = Carousel::all();
+        return view('home', compact('info_gym', 'carousels'));
     }
 
     public function store(RegistrationRequest $request): JsonResponse

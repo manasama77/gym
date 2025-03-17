@@ -2,14 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\LogMembershipStatusType;
 use App\RoleType;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
-use App\Models\GymPackage;
-use App\Models\Membership;
-use App\Models\LogMembership;
-use Illuminate\Support\Carbon;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Database\Seeders\InfoGymSeeder;
@@ -51,11 +46,12 @@ class DatabaseSeeder extends Seeder
         ])->assignRole(RoleType::ADMIN->value);
         // INIT DATA ADMIN START
 
-        // INIT GYM PACKAGE & DEFAULT INFO GYM START
+        // INIT GYM PACKAGE & DEFAULT INFO GYM & CAROUSEL START
         $this->call([
             GymPackageSeeder::class,
             InfoGymSeeder::class,
+            CarouselSeeder::class,
         ]);
-        // INIT GYM PACKAGE & DEFAULT INFO GYM END
+        // INIT GYM PACKAGE & DEFAULT INFO GYM & CAROUSEL END
     }
 }
