@@ -2,8 +2,7 @@
     <form wire:submit.prevent="save">
         <fieldset class="fieldset">
             <legend class="fieldset-legend">Member</legend>
-            <select class="select w-full" wire:model="member_id"
-                wire:change="$emit('memberSelected', $event.target.value)">
+            <select class="select w-full" wire:model="member_id" wire:change="getGymPackages($event.target.value)">
                 <option value="" disabled selected>Pilih member</option>
                 @foreach ($memberships as $membership)
                     <option value="{{ $membership->id }}">

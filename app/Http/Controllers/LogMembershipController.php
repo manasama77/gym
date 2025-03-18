@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GymPackage;
-use App\Models\Membership;
-use Illuminate\Http\Request;
-use App\Models\LogMembership;
-use App\LogMembershipStatusType;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreLogMembershipRequest;
 use App\Http\Requests\UpdateLogMembershipRequest;
+use App\LogMembershipStatusType;
+use App\MembershipStatus;
+use App\Models\LogMembership;
+use App\Models\Membership;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LogMembershipController extends Controller
 {
@@ -29,7 +29,7 @@ class LogMembershipController extends Controller
             ->orderBy('status', 'asc')
             ->orderBy('start_date', 'desc')
             ->whereHas('membership.user', function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->keyword . '%');
+                $query->where('name', 'like', '%'.$request->keyword.'%');
             });
 
         if (Auth::user()->role == 'user') {
@@ -57,6 +57,7 @@ class LogMembershipController extends Controller
         }
 
         $memberships = $memberships->get();
+
         return view('pages.extend_membership.form', compact('title', 'memberships'));
     }
 
@@ -106,11 +107,11 @@ class LogMembershipController extends Controller
             return response()->json([
                 [
                     'message' => 'ID tidak ditemukan',
-                ]
+                ],
             ], 404);
         }
 
-        if (!in_array($type, ['approve', 'reject',])) {
+        if (! in_array($type, ['approve', 'reject'])) {
             return response()->json([
                 'message' => 'Status tidak ditemukan',
             ], 404);
@@ -118,7 +119,7 @@ class LogMembershipController extends Controller
 
         $log_membership = LogMembership::find($id);
 
-        if (!$log_membership) {
+        if (! $log_membership) {
             return response()->json([
                 'message' => 'Data tidak ditemukan',
             ], 404);
@@ -133,7 +134,7 @@ class LogMembershipController extends Controller
 
             Membership::where('id', $membership_id)->update([
                 'expired_date' => $end_date,
-                'status' => 1,
+                'status' => MembershipStatus::ACTIVE->value,
             ]);
 
             $log_membership->start_date = $start_date;
@@ -143,7 +144,7 @@ class LogMembershipController extends Controller
             $end_date = $expired_date->addMonths($duration);
             Membership::where('id', $membership_id)->update([
                 'expired_date' => $end_date,
-                'status' => 1,
+                'status' => MembershipStatus::ACTIVE->value,
             ]);
 
             $log_membership->start_date = $start_date;

@@ -74,6 +74,20 @@ php artisan migrate --seed
 composer run dev
 ```
 
+## Manual Run Task Schedule to Check Expired Memberships
+
+To check expired memberships manually, follow these steps:
+
+1. Open Table `membership` in your database
+
+2. Update the `expired_date` column of the expired memberships to `date before today`
+
+3. Run the following command:
+
+```bash
+php artisan expired
+```
+
 ## Have Questions?
 
 If you have any questions or feedback, please open an issue in the [GitHub repository](https://github.com/manasama77/gym/issues) or send an email to [adam.pm77@gmail.com](mailto:adam.pm77@gmail.com). Need fast support? Contact us on [WhatsApp](https://wa.me/6282114578976).

@@ -20,7 +20,7 @@ class RegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email:rfc,dns', 'unique:' . User::class],
+            'email' => ['required', 'email:rfc,dns', 'unique:'.User::class],
             'password' => ['required', 'min:8', 'confirmed'],
             'password_confirmation' => ['required', 'min:8'],
             'name' => ['required', 'min:3'],
@@ -38,18 +38,18 @@ class RegistrationRequest extends FormRequest
             'email.email' => 'Email tidak valid',
             'email.unique' => 'Email sudah terdaftar',
             'password.required' => 'Password wajib diisi',
-            'password.min' => "Password minimal %s karakter",
+            'password.min' => 'Password minimal %s karakter',
             'password.confirmed' => 'Password tidak sama',
             'password_confirmation.required' => 'Konfirmasi password wajib diisi',
-            'password_confirmation.min' => "Konfirmasi password minimal %s karakter",
+            'password_confirmation.min' => 'Konfirmasi password minimal %s karakter',
             'name.required' => 'Nama wajib diisi',
-            'name.min' => "Nama minimal %s karakter",
+            'name.min' => 'Nama minimal %s karakter',
             'gym_package_id.required' => 'Paket wajib dipilih',
             'gym_package_id.exists' => 'Paket tidak ditemukan',
             'gender.required' => 'Jenis kelamin wajib dipilih',
             'member_type.required' => 'Jenis member wajib dipilih',
             'no_whatsapp.required' => 'No Whatsapp wajib diisi',
-            'no_whatsapp.min' => "No Whatsapp minimal %s karakter",
+            'no_whatsapp.min' => 'No Whatsapp minimal %s karakter',
         ];
     }
 }

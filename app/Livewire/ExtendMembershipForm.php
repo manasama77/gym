@@ -2,13 +2,13 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use App\Models\GymPackage;
-use App\Models\Membership;
-use App\Models\LogMembership;
 use App\LogMembershipStatusType;
-use Livewire\Attributes\Validate;
+use App\Models\GymPackage;
+use App\Models\LogMembership;
+use App\Models\Membership;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class ExtendMembershipForm extends Component
 {
@@ -21,7 +21,8 @@ class ExtendMembershipForm extends Component
     public string $gym_package_id;
 
     public object $memberships;
-    public object $gym_packages;
+
+    public $gym_packages = [];
 
     public function mount($memberships)
     {
@@ -30,24 +31,29 @@ class ExtendMembershipForm extends Component
 
         if (Auth::user()->hasRole('user')) {
             $this->member_id = Auth::user()->memberships->id;
-            $this->getGymPackages();
+            $this->getGymPackages($this->member_id);
         } else {
             $this->member_id = '';
+            $this->gym_packages = [];
+        }
+
+    }
+
+    public function getGymPackages($member_id)
+    {
+        $membership = Membership::find($member_id);
+
+        if ($membership) {
+            $this->gym_packages = GymPackage::where('member_type', $membership->member_type->value)->get();
+        } else {
             $this->gym_packages = collect();
         }
 
     }
 
-    public function getGymPackages()
-    {
-        $membership = Membership::findOrFail($this->member_id);
-        $this->gym_packages = GymPackage::where('member_type', $membership->member_type->value)->get();
-    }
-
-
     public function updatedMemberId()
     {
-        $this->getGymPackages();
+        $this->getGymPackages($this->member_id);
     }
 
     public function save()
@@ -72,7 +78,6 @@ class ExtendMembershipForm extends Component
         session()->flash('success', 'Request Extend Membership berhasil dibuat');
         $this->redirect(route('extend-membership'));
     }
-
 
     public function render()
     {
